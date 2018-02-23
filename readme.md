@@ -1,6 +1,7 @@
-#Githubi põhise õpikeskkonna arendamine
+Githubi põhise õpikeskkonna arendamine
   
 Bakalaureusetöö
   
 Autor: Andre Post
-Juhendaka: Romil Rõbtšenkov
+
+Juhendaja: Romil Rõbtšenkov
