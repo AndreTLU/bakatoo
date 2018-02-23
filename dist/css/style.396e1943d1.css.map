@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/components/Home/src/components/Home/Home.scss"],"names":[],"mappings":"AAAA;EAEI,YAAW,EACZ","file":"css/style.396e1943d1.css","sourcesContent":["#home {\n  h1 {\n    color: blue;\n  }\n}\n\n\n// WEBPACK FOOTER //\n// ./src/components/Home/src/components/Home/Home.scss"],"sourceRoot":""}

@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "bakatoo backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreTLU/bakatoo.git"
+  },
+  "author": "Andre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreTLU/bakatoo/issues"
+  },
+  "homepage": "https://github.com/AndreTLU/bakatoo#readme"
+}
