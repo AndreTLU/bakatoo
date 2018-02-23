@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AndreTLU/bakatoo.git"
+    "url": "git+https://github.com/AndreTLU/github-opikeskkond.git"
   },
   "author": "Andre",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AndreTLU/bakatoo/issues"
+    "url": "https://github.com/AndreTLU/github-opikeskkond/issues"
   },
-  "homepage": "https://github.com/AndreTLU/bakatoo#readme"
+  "homepage": "https://github.com/AndreTLU/github-opikeskkond#readme"
 }
