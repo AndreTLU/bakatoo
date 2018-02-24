@@ -3,9 +3,10 @@ import { render } from 'react-dom'
 import { Route, Switch, BrowserRouter, browserHistory } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
+import store from './store'
 
 render (
-    <Provider>
+    <Provider store={store}>
         <BrowserRouter history={browserHistory}>
             <div id='content-wrapper'>
                 <Switch>
@@ -13,5 +14,6 @@ render (
                 </Switch>
             </div>
         </BrowserRouter>
-    </Provider>
+    </Provider>,
+    document.querySelector('#main')
 )
