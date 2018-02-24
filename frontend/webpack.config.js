@@ -8,6 +8,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     
 const BUILD_DIR = path.resolve(__dirname, './dist')
 const SRC_DIR = path.resolve(__dirname, './src')
+const PRODUCTION = process.env.NODE_ENV === 'production'
+const VISUALIZE = process.env.visualization === 'true'
 
 console.log('Running webpack server in ' + process.env.NODE_ENV)
 
