@@ -5,12 +5,14 @@ import { Provider } from 'react-redux'
 
 import store from './store'
 
+import HomeContainer from './containers/HomeContainer'
+
 render (
     <Provider store={store}>
         <BrowserRouter history={browserHistory}>
             <div id='content-wrapper'>
                 <Switch>
-                <Route exact path='/' restrict />
+                    <Route exact path='/' restrict component={HomeContainer}/>
                 </Switch>
             </div>
         </BrowserRouter>
