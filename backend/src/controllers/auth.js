@@ -1,26 +1,26 @@
-import { blacklistToken, signToken } from '../utils/jwt';
-
+const { blacklistToken, signToken } = require('../utils/jwt')
 const User = require('../models/user')
 
 module.exports.githubLogin = async (req,res) => {
-    console.log(req.user.id)
+    //console.log(req)
     const existingUser = await User.findOne({'login.githubId': req.user.id})
     if(!existingUser){
         console.log('no user exists')
+        //console.log(req)
         const user = await new User({
             profile:{
-                name: req.user.name,
-                loginName: req.user.login,
-                email: req.user.email
+                name: req.user.displayName,
+                loginName: req.user.username
             },
             login:{
                 githubId: req.user.id
             }
         }).save()
-
         const token = signToken(user)
-        console.log(token)
+        return res.redirect('/?loading=true&token='+token)
     }
+    const token = signToken(existingUser)
+    return res.redirect('/?loading=true&token='+token)
 }
 
 module.exports.logout = async (req,res) => {
