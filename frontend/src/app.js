@@ -6,13 +6,14 @@ import { Provider } from 'react-redux'
 import store from './store'
 
 import HomeContainer from './containers/HomeContainer'
+import RouteContainer from './containers/RouteContainer'
 
 render (
     <Provider store={store}>
         <BrowserRouter history={browserHistory}>
             <div id='content-wrapper'>
                 <Switch>
-                    <Route exact path='/' restrict component={HomeContainer}/>
+                    <Route exact path='/' component={RouteContainer(HomeContainer)}/>
                 </Switch>
             </div>
         </BrowserRouter>
