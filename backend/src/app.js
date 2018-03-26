@@ -1,12 +1,19 @@
 const express = require('express')
 const morgan = require('morgan')
 const bodyParse = require('body-parser')
+const mongoose = require('mongoose')
 const expressValidator = require('express-validator')
 const passport = require('passport')
 const helmet = require('helmet')
 const app = express();
 
 const GithubStrategy = require('passport-github2').Strategy
+
+mongoose.Promise = global.Promise
+mongoose.connect(process.env.MONGODB_URI, (err)=>{
+    if(err) console.log(err)
+    console.log('Connected to MongoDB')
+})
 
 app.use(morgan('dev'))
 app.use(bodyParse.json())
@@ -18,6 +25,7 @@ passport.use(new GithubStrategy({
 	clientSecret: process.env.GitClientSecret,
 	callbackURL: process.env.GitCallback
 }, (accessToken, refreshToken, profile, done)=>{
+    console.log(accessToken)
     return done(null, profile)
 }))
 
