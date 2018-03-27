@@ -4,6 +4,7 @@ const passport = require('passport')
 const asyncMiddleware = require('./utils/asyncMiddleware')
 const auth = require('./controllers/auth')
 const users = require('./controllers/users')
+const orgs = require('./controllers/organizations')
 
 const { jwtEnsure, jwtCheck } = require('./utils/jwt')
 
@@ -12,7 +13,8 @@ router.get('/auth/github/oauth2callback', passport.authenticate('github', {failu
 router.post('/auth/logout', jwtEnsure, asyncMiddleware(auth.logout))
 
 router.get('/users/me', jwtCheck, jwtEnsure, asyncMiddleware(users.getUser))
-//router.get('/users', jwtCheck, jwtEnsure, asyncMiddleware(users.getUsers))
+router.get('/users', jwtCheck, jwtEnsure, asyncMiddleware(users.getUsers))
 
-router.get('/orgs/me', asyncMiddleware(users.getOrgs))
+router.get('/orgs/:name', jwtCheck, jwtEnsure, asyncMiddleware(orgs.getOrgs))
+router.post('/orgs', jwtCheck, jwtEnsure, asyncMiddleware(orgs.saveOrg))
 module.exports = router
