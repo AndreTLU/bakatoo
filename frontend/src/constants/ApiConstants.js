@@ -1,0 +1,1 @@
+export const SUBJECT_SLUG_URL = '/repos/:slug'
