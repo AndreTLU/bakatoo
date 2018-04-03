@@ -14,11 +14,13 @@ module.exports.githubLogin = async (req,res) => {
             },
             login:{
                 githubId: req.user.id
-            }
+            },
+            accessToken: req.user.token
         }).save()
         const token = signToken(user)
         return res.redirect('/?loading=true&token='+token)
     }
+    await User.findOneAndUpdate({'login.githubId': req.user.id}, {$set:{'accessToken': req.user.token}}, {upsert:true})
     const token = signToken(existingUser)
     return res.redirect('/?loading=true&token='+token)
 }
