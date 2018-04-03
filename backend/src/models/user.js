@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema(
         },
         login: {
             githubId: { type: String }
-        }
+        },
+        accessToken: { type: String }
     },
     { timestamps: true }
 )
