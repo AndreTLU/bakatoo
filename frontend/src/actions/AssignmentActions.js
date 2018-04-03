@@ -1,10 +1,10 @@
 import * as types from '../constants/ActionTypes'
 import Api from '../utils/api'
 
-module.exports.getAssignements = slug => dispatch => {
-    return Api('GET', '/assignements/'+slug, {})
+module.exports.getAssignments = slug => dispatch => {
+    return Api('GET', '/assignments/'+slug, {})
         .then(data => {
-            dispatch({type:'ASSIGNEMENTS_LOADED', data: data})
+            dispatch({type:'ASSIGNMENTS_LOADED', data: data})
         })
         .catch(err =>{
             console.log(err)

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const assignementSchema = new mongoose.Schema(
+const assignmentSchema = new mongoose.Schema(
     {
         ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
         gId: String,
@@ -14,6 +14,6 @@ const assignementSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-const Assignement = mongoose.model('Assignement', assignementSchema)
+const Assignment = mongoose.model('Assignment', assignmentSchema)
 
-module.exports = Assignement
+module.exports = Assignment

@@ -17,7 +17,7 @@ export default function (state = INITIAL_STATE, action){
                 loading: false
             }
         }
-        case 'ASSIGNEMENTS_LOADED': {
+        case 'ASSIGNMENTS_LOADED': {
             const { data } = action
             return {
                 ...state,
@@ -25,7 +25,7 @@ export default function (state = INITIAL_STATE, action){
                 loading: false
             }
         }
-        case 'ASSIGNEMENTS_LOAD_INIT':
+        case 'ASSIGNMENTS_LOAD_INIT':
             return {
                 loading: true
             }

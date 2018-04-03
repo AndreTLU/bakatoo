@@ -20,7 +20,7 @@ router.get('/orgs/:slug', jwtCheck, jwtEnsure, asyncMiddleware(orgs.getOrgName))
 
 router.get('/orgs/', jwtCheck, jwtEnsure, asyncMiddleware(orgs.getOrgs))
 
-router.post('/assignements/', jwtCheck, jwtEnsure, asyncMiddleware(orgs.saveAssignement))
-router.get('/assignements/:slug', jwtCheck, jwtEnsure, asyncMiddleware(orgs.getAssignements))
+router.post('/assignments/', jwtCheck, jwtEnsure, asyncMiddleware(orgs.saveAssignment))
+router.get('/assignments/:slug', jwtCheck, jwtEnsure, asyncMiddleware(orgs.getAssignments))
 //router.post('/orgs', jwtCheck, jwtEnsure, asyncMiddleware(orgs.saveOrg))
 module.exports = router

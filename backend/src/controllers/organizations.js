@@ -2,7 +2,7 @@
 const { Api } = require('../utils/api')
 
 const User = require('../models/user')
-const Assignement = require('../models/assignement')
+const Assignment = require('../models/assignment')
 
 module.exports.getOrgs = async (req, res) =>{
     const user = await User.findById(req.user._id, 'accessToken')
@@ -51,14 +51,14 @@ module.exports.getOrgName = async (req, res) => {
         .catch(()=>{
         })
 }
-module.exports.getAssignements = async (req, res) => {
+module.exports.getAssignments = async (req, res) => {
     const assignements = await Assignement.find({subject: req.params.slug})
     return res.json(assignements)
 }
-module.exports.saveAssignement = async (req, res) => {
-    const existingAssignement = await Assignement.findOne({gId: req.body.key})
-    if(!existingAssignement){
-        const assignement = await new Assignement({
+module.exports.saveAssignment = async (req, res) => {
+    const existingAssignment = await Assignment.findOne({gId: req.body.key})
+    if(!existingAssignment){
+        const assignment = await new Assignement({
             ownerId: req.user._id,
             gId: req.body.key,
             subject: req.body.owner.login,
@@ -68,8 +68,8 @@ module.exports.saveAssignement = async (req, res) => {
             grading: false,
             deleted: false
         }).save()
-        return res.json({msg: 'Assignement saved'})
+        return res.json({msg: 'Assignment saved'})
     }
-    return res.json({msg: 'Assignement exists'})
+    return res.json({msg: 'Assignment exists'})
     
 }

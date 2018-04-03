@@ -8,9 +8,9 @@ class SubjectTable extends React.Component{
         super(props)
     }
 
-    addAssignement(id){
+    addAssignment(id){
         console.log(id)
-        Api('POST', '/assignements', { data:id })
+        Api('POST', '/assignments', { data:id })
             .then((data) => {
                 console.log(data)
             })
@@ -43,7 +43,7 @@ class SubjectTable extends React.Component{
             key: 'lisa',
             render: (text, record) =>(
                 <span>
-                    <Button onClick={()=> this.addAssignement(record)}>Lisa</Button>
+                    <Button onClick={()=> this.addAssignment(record)}>Lisa</Button>
                 </span>
             )
         }]

@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Assignement from '../components/Assignement'
+import Assignment from '../components/Assignment'
 
-const AssignementContainer = props => <Assignement {...props} />
+const AssignmentContainer = props => <Assignment {...props} />
 
 const mapStateToProps = state => ({
     auth: state.auth,
@@ -14,4 +14,4 @@ const mapDispatchToProps = (dispatch, props) => ({
     getWorks: () => dispatch(getWorks(props.match.params.assign)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssignementContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(AssignmentContainer)

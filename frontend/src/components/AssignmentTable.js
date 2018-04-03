@@ -3,7 +3,7 @@ import { Table, Divider, Button} from 'antd'
 import { Link } from 'react-router-dom'
 import Api from '../utils/api'
 
-class SubjectTable extends React.Component{
+class AssignmentTable extends React.Component{
     constructor(props){
         super(props)
     }
@@ -28,7 +28,7 @@ class SubjectTable extends React.Component{
         }]
         return(
             <div>
-                <div className='assignement'>
+                <div className='assignment'>
                 <Table columns={columns} dataSource={items}></Table>
                 </div>
             </div>
@@ -36,4 +36,4 @@ class SubjectTable extends React.Component{
     }
 }
 
-export default SubjectTable
+export default AssignmentTable
