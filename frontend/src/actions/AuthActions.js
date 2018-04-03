@@ -10,10 +10,11 @@ export const checkUser = () => {
             .then(data =>{
                 console.log(data)
                 const { user, token } = data
-                console.log('test')
+                if(token) setToken(token)
                 dispatch({ type: types.AUTH_LOADED, user})
             })
             .catch(()=>{
+                console.log('error')
                 clearToken()
                 return dispatch({ type: types.AUTH_INIT})
             })
