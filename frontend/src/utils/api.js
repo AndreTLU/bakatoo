@@ -17,7 +17,6 @@ export default (method, url, query) => {
             return Promise.resolve(response.data)
         })
         .catch(err => {
-            console.error(err)
             return Promise.reject(err.response)
         })
 }
