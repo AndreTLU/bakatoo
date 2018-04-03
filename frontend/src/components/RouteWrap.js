@@ -1,8 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
-
-const { bool, func, shape, string } = PropTypes
 
 class RouteWrap extends React.Component {
     constructor (props){
