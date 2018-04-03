@@ -17,7 +17,7 @@ module.exports.jwtEnsure = async (req, res, next) => {
       if (isBlacklisted) {
         log.warning(`${req.user._id} tried blacklisted token ${isBlacklisted}`)
   
-        return next(new NotAuthorizedError())
+        return next('Not authorized')
       }
   
       // check if token valid after user data changed
