@@ -4,10 +4,12 @@ import queryString from 'query-string'
 import { getToken, setToken } from '../utils/jwt'
 import { Button } from 'antd'
 
+import  HomeSubjects  from './HomeSubjects'
+
 class Home extends React.Component {
     constructor(props){
         super(props)
-        this.startGithubLogin = this.startGithubLogin.bind(this)
+        
     }
 
     componentWillMount(){
@@ -15,22 +17,20 @@ class Home extends React.Component {
         const { token } = queryString.parse(this.props.history.location.search, {
             arrayFormat: 'bracket'
         })
-        console.log(token)
 
         if(token){
             setToken(token)
             window.setTimeout(()=>{
                 window.opener.location.reload(true)
                 window.close()
-            }, 2000)
-        }
-        
+            }, 1000)
+        }       
+    }
+    componentDidMount(){
+        this.props.getSubjects()
     }
 
-    startGithubLogin() {
-        const url = window.location.origin + '/api/auth/github'
-        window.open(url, 'name', 'height=600,width=450')
-    }
+    
 
     render(){
         const { 
@@ -40,17 +40,16 @@ class Home extends React.Component {
                     profile
                 }
             },
-            loading
+            home:{loading, subjects}
         } = this.props
-        const showName = isAuthenticated
+        console.log(subjects)
         return(
             <div>
                 <h1>Githubi põhine õpikeskkond</h1>
-                {showName && 
+                {isAuthenticated && 
                     <h2>Tere, {profile.name}!</h2>
                 }
-                {isAuthenticated && <a href='' onClick={this.props.logout}>Log out</a>}
-                {!isAuthenticated && <Button htmlType='submit' onClick={this.startGithubLogin}>Github Login</Button>}
+                {!loading && <HomeSubjects subjects={subjects}/>}
             </div>
         )
     }
