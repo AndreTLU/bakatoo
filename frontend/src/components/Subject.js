@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, Divider, Tabs } from 'antd'
 import SubjectTable from './SubjectTable'
-import AssignementTable from './AssignementTable'
+import AssignmentTable from './AssignmentTable'
 
 class Subject extends React.Component{
     constructor(props){
@@ -10,7 +10,7 @@ class Subject extends React.Component{
     componentDidMount (){
         this.props.getSubjectName()
         this.props.getSubject()
-        this.props.getAssignements()
+        this.props.getAssignments()
     }
     
     render(){
@@ -33,7 +33,7 @@ class Subject extends React.Component{
                         </div>
                         <Tabs defaultActiveKey='1'>
                             <TabPane tab='Salvestatud tööd' key='1'>
-                                <AssignementTable data={assignements}/>
+                                <AssignmentTable data={assignements}/>
                             </TabPane>
                             <TabPane tab='Lisa töid' key='2'>
                             <div className='subject'>

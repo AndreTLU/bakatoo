@@ -25,7 +25,7 @@ render (
                         <Switch>
                             <Route exact path='/' component={RouteContainer(HomeContainer)}/>
                             <Route path='/subject/:slug' component={RouteContainer(SubjectContainer)} />
-                            <Route path='/subject/:slug/:assign' component={RouteContainer(SubjectContainer)} />
+                            
                         </Switch>
                     </div>
                 </Content>

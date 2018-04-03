@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Subject from '../components/Subject'
 
 import { getSubject, getSubjectName } from '../actions/SubjectActions'
-import { getAssignements } from '../actions/AssignementActions'
+import { getAssignments } from '../actions/AssignmentActions'
 
 const SubjectContainer = props => <Subject {...props} />
 
@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, props) => ({
     getSubject: () => dispatch(getSubject(props.match.params.slug)),
     getSubjectName: () => dispatch(getSubjectName(props.match.params.slug)),
-    getAssignements: () => dispatch(getAssignements(props.match.params.slug))
+    getAssignments: () => dispatch(getAssignments(props.match.params.slug))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubjectContainer)

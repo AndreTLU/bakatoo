@@ -52,13 +52,13 @@ module.exports.getOrgName = async (req, res) => {
         })
 }
 module.exports.getAssignments = async (req, res) => {
-    const assignements = await Assignement.find({subject: req.params.slug})
-    return res.json(assignements)
+    const assignments = await Assignment.find({subject: req.params.slug})
+    return res.json(assignments)
 }
 module.exports.saveAssignment = async (req, res) => {
     const existingAssignment = await Assignment.findOne({gId: req.body.key})
     if(!existingAssignment){
-        const assignment = await new Assignement({
+        const assignment = await new Assignment({
             ownerId: req.user._id,
             gId: req.body.key,
             subject: req.body.owner.login,

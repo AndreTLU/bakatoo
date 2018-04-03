@@ -10,6 +10,3 @@ module.exports.getAssignments = slug => dispatch => {
             console.log(err)
         })
 }
-module.exports.getWorks = assign => dispatch => {
-    return jsn({d})
-}
