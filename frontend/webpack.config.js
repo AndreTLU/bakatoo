@@ -1,71 +1,24 @@
-const CompressionPlugin = require('compression-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
-const webpack = require('webpack')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-    .BundleAnalyzerPlugin
-    
-const BUILD_DIR = path.resolve(__dirname, './dist')
-const SRC_DIR = path.resolve(__dirname, './src')
-const PRODUCTION = process.env.NODE_ENV === 'production'
-const VISUALIZE = process.env.visualization === 'true'
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const fs = require('fs');
+const lessToJs = require('less-vars-to-js');
 
-console.log('Running webpack server in ' + process.env.NODE_ENV)
+const BUILD_DIR = path.resolve(__dirname, './dist');
+const SRC_DIR = path.resolve(__dirname, './src');
+const themeVars = path.join(
+  __dirname,
+  './src/antd-theme-overrides.less',
+);
+const themeVariables = lessToJs(fs.readFileSync(themeVars, 'utf8'));
 
-const extractSCSS = new ExtractTextPlugin('css/style.[contenthash:10].css')
-
-const isExternal = function (module) {
-	var context = module.context
-	if (typeof context !== 'string') {
-		return false
-	}
-	return context.indexOf('node_modules') !== -1
-}
+console.log('Running webpack server');
 
 const plugins = [
-	VISUALIZE
-		? new BundleAnalyzerPlugin({
-			analyzerMode: 'static'
-		})
-		: null,
-	extractSCSS,
-	// TODO merge css files via merge-files-webpack-plugin
-	new webpack.optimize.CommonsChunkPlugin({
-		name: 'vendors',
-		minChunks: function (module) {
-			return isExternal(module)
-		}
-	}),
-	new webpack.optimize.CommonsChunkPlugin({
-		name: 'manifest'
-	}),
 	new HtmlWebpackPlugin({
-		// hash: DEVELOPMENT ? true : false, // if needed to force remove caching issues while in dev
 		template: SRC_DIR + '/index.html',
-		minify: {
-			collapseWhitespace: !!PRODUCTION // this is for minifying HTML in PRODUCTION
-		}
-	}),
-	PRODUCTION
-		? (new webpack.optimize.UglifyJsPlugin({
-			comments: false,
-			compress: {
-				warnings: false,
-				drop_console: true
-			},
-			minimize: true,
-			sourceMap: true
-		}),
-			new CompressionPlugin({
-				asset: '[path].gz[query]',
-				algorithm: 'gzip',
-				test: /\.js$|\.css$|\.html$/,
-				threshold: 10240, // only if file size > 10.24 kb
-				minRatio: 0.8
-			}))
-		: null
-].filter(p => p)
+	})
+];
 
 const rules = [
 	{
@@ -74,42 +27,36 @@ const rules = [
 		use: {
 			loader: 'babel-loader',
 			options: {
-				presets: ['es2015', 'react', 'stage-0'],
+				presets: ['@babel/preset-env', '@babel/preset-react'],
 				plugins: [
-					'transform-object-rest-spread',
-					'transform-do-expressions',
-					['import', { libraryName: 'antd', style: 'css'}]
+					['import', { libraryName: 'antd', style: true}]
 				]
-			}
+}
 		}
-	},
-	// TODO add autoprefixer like autoprefixer?browsers=last 2 version
-	{
-		test: /\.scss$/,
-		use: extractSCSS.extract({
-			fallback: 'style-loader',
-			use: [
-				{ loader: 'css-loader', options: { sourceMap: true } },
-				{ loader: 'sass-loader', options: { sourceMap: true } }
-			]
-		})
 	},
 	{
 		test: /\.css$/,
-		use: extractSCSS.extract({
-			fallback: 'style-loader',
-			use: [
-				{ loader: 'css-loader' }
-			]
-		})
-	}
-]
+		use: { loader: 'css-loader' }
+  },
+  {
+    test: /\.less$/,
+    use: [
+      'style-loader',
+      { loader: 'css-loader', options: { importLoaders: 1 } },
+      {
+        loader: 'less-loader',
+        options: { javascriptEnabled: true, modifyVars: themeVariables },
+      },
+    ],
+  }
+];
 
 module.exports = {
-	devtool: 'source-map',
+  devtool: 'source-map',
+  mode: 'development',
 	stats: 'normal',
 	entry: {
-		app: [SRC_DIR + '/app.js']
+		app: [SRC_DIR + '/index.js']
 	},
 	plugins: plugins,
 	module: {
@@ -117,20 +64,22 @@ module.exports = {
 	},
 	output: {
 		path: BUILD_DIR,
-		publicPath: PRODUCTION ? '/' : '/',
-		filename: PRODUCTION ? 'js/[name].[chunkhash].js' : 'js/[name].js',
+		publicPath: '/',
+		filename: 'js/[name].js',
 		chunkFilename: '[chunkhash].js'
 	},
 	devServer: {
-		host: 'andrep.me',
-		port: 80, // preferred port
+		//host: 'andrep.me',
+		port: 3446, // preferred port
 		contentBase: BUILD_DIR,
 		compress: true,
-		historyApiFallback: true,
+		historyApiFallback: {
+      disableDotRule: true
+    },
 		hot: true,
 		inline: true,
 		noInfo: true,
 		watchOptions: { poll: true },
-		proxy: { '/api': 'http://localhost:8080'}
+		//proxy: { '/api': 'http://localhost:8080'}
 	}
 }
