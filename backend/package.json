@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "bakatoo backend",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndreTLU/github-opikeskkond.git"
+  },
+  "scripts": {
+    "start-dev": "nodemon ./src/server.js"
   },
   "author": "Andre",
   "license": "ISC",
@@ -18,16 +18,16 @@
   "homepage": "https://github.com/AndreTLU/github-opikeskkond#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "bcrypt": "^1.0.3",
-    "body-parser": "^1.18.2",
-    "dotenv": "^5.0.0",
-    "express": "^4.16.2",
-    "express-jwt": "^5.3.0",
-    "express-validator": "^5.0.1",
-    "helmet": "^3.11.0",
-    "jsonwebtoken": "^8.1.1",
-    "mongoose": "^5.0.7",
-    "morgan": "^1.9.0",
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "cron": "^1.5.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "express-validator": "^5.3.0",
+    "helmet": "^3.15.0",
+    "mongoose": "^5.3.12",
+    "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-github2": "^0.1.11"
   }
