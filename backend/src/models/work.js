@@ -1,18 +1,26 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const workSchema = new mongoose.Schema(
-    {
-        ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
-        gId: String,
-        subject: String,
-        name: String,
-        slug: String,
-        url: String,
-        grade: String
+	{
+    owner: {
+      githubId: String,
+      login: String,
+      url: String
     },
-    { timestamps: true }
-)
+    title: String,
+    key: String,
+    subject: {type: mongoose.Schema.Types.ObjectId, ref: 'Subject'},
+    state: String,
+    slug: String,
+    url: String,
+    assignment: {type: mongoose.Schema.Types.ObjectId, ref:'Assignment', required:true },
+    grade: String,
+    graded: Boolean,
+    comment: String
+	},
+	{ timestamps: true }
+);
 
-const Work = mongoose.model('Work', workSchema)
+const Work = mongoose.model('Work', workSchema);
 
-module.exports = Work
+module.exports = Work;

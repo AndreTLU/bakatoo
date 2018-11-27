@@ -9,10 +9,6 @@ const app = express();
 
 const GithubStrategy = require('passport-github2').Strategy;
 
-const User = require('./models/user');
-
-
-
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI, (err)=>{
   if(err) console.log(err)
@@ -28,8 +24,6 @@ passport.use(new GithubStrategy({
   clientSecret: process.env.GitClientSecret,
   callbackURL: process.env.GitCallback
 }, (accessToken, refreshToken, profile, done)=>{
-  //console.log(accessToken)
-  profile.token = accessToken
   return done(null, profile);
 }));
 

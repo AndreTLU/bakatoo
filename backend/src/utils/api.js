@@ -1,6 +1,6 @@
-const axios = require('axios')
+const axios = require('axios');
 
-const BASE_URL = '/api'
+const BASE_URL = '/api';
 
 module.exports.Api = (method, url, query, header) => {
     return axios
@@ -17,5 +17,5 @@ module.exports.Api = (method, url, query, header) => {
         })
         .catch(err => {
             return Promise.reject(err.response)
-        })
+        });
 }

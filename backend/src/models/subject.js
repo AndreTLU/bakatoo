@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const subjectSchema = new mongoose.Schema(
     {
@@ -12,8 +12,8 @@ const subjectSchema = new mongoose.Schema(
         works: [{type: Schema.Types.ObjectId, ref: 'Work'}]
     },
     { timestamps: true }
-)
+);
 
-const Subject = mongoose.model('Subject', subjectSchema)
+const Subject = mongoose.model('Subject', subjectSchema);
 
-module.exports = Subject
+module.exports = Subject;
