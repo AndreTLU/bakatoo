@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router'
 
-class RouteWrap extends React.Component {
+class RouteWrapper extends React.Component {
     constructor (props){
         super(props)
         this.state = { allowPageLoad: false }
@@ -9,7 +9,7 @@ class RouteWrap extends React.Component {
     }
 
     componentDidMount() {
-        this.props.checkUser()
+        this.props.checkUser();
     }
 
     componentWillReceiveProps (nextProps) {
@@ -43,4 +43,4 @@ class RouteWrap extends React.Component {
     }
 }
 
-export default RouteWrap
+export default RouteWrapper

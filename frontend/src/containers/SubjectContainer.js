@@ -1,22 +1,25 @@
-import React from 'react'
-import { connect } from 'react-redux'
-
-import Subject from '../components/Subject'
-
-import { getSubject, getSubjectName } from '../actions/SubjectActions'
-import { getAssignments } from '../actions/AssignmentActions'
-
-const SubjectContainer = props => <Subject {...props} />
+import { connect } from 'react-redux';
+import Subject from '../components/Subject';
+import { loadSubjects } from '../actions/HomeActions';
+import { fetchAssignments, saveAssignment } from '../actions/AssignmentActions';
+import { fetchSubjectBySlug } from '../actions/SubjectActions';
+import { types } from 'util';
 
 const mapStateToProps = state => ({
-    auth: state.auth,
-    subject: state.subject
-})
+  subjectList: state.subject.subjectList,
+  activeSubject: state.subject.activeSubject,
+  assignmentList: state.assignment.assignmentList,
+});
 
-const mapDispatchToProps = (dispatch, props) => ({
-    getSubject: () => dispatch(getSubject(props.match.params.slug)),
-    getSubjectName: () => dispatch(getSubjectName(props.match.params.slug)),
-    getAssignments: () => dispatch(getAssignments(props.match.params.slug))
-})
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    fetchSubject : (callback) => {
+      dispatch(fetchSubjectBySlug(props.match.params.slug, callback));
+    },
+    fetchAssignments: () => {
+      dispatch(fetchAssignments(props.match.params.slug));
+    }
+  }
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubjectContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(Subject);

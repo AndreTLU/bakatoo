@@ -6,18 +6,17 @@ const INITIAL_STATE = {
 }
 
 export default function (state = INITIAL_STATE, action){
-    switch(action.type){
-        case types.SUBJECTS_LOADED: {
-            const { subjects } = action
-            return {
-                ...state,
-                subjects,
-                loading: false
-            }
+  switch(action.type){
+    case types.LOAD_SUBJECTS_SUCCESS: {
+        return {
+            ...state,
+            subjects:action,
+            loading: false
         }
-        default:
-            return {
-                ...state
-            }
     }
-}
+    default:
+        return {
+            ...state
+        }
+  }
+};
