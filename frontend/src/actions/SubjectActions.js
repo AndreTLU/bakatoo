@@ -1,24 +1,58 @@
-import * as types from '../constants/ActionTypes'
-import Api from '../utils/api'
+import * as types from '../constants/ActionTypes';
+import axios from 'axios';
+import Api from '../utils/api';
+//import { clearToken, setToken } from '../utils/jwt';
 
-import { SUBJECT_SLUG_URL } from '../constants/ApiConstants'
+const BASE_URL = '/api';
+const token = localStorage.jwt;
 
-module.exports.getSubject = slug => dispatch => {
-    return Api('GET', SUBJECT_SLUG_URL.replace(':slug', slug), {})
-        .then(data => {
-            dispatch({ type: types.SUBJECT_LOADED, meta: data})
-        })
-        .catch(err =>{
-            console.log(err)
-        })
+export function saveSubjectSuccess(response){
+  return {type: types.SAVE_SUBJECT_SUCCESS, payload: response};
 }
-module.exports.getSubjectName = slug => dispatch => {
-    dispatch({type: types.SUBJECT_NAME_LOAD_INIT})
-    return Api('GET', '/orgs/'+slug, {})
-        .then(data => {
-            dispatch({ type: types.SUBJECT_NAME_LOADED, title: data})
-        })
-        .catch(err =>{
-            console.log(err)
-        })
+
+export function fetchSubjectSuccess(response){
+  return {type: types.FETCH_SUBJECT_SUCCESS, payload: response};
+}
+
+
+export const saveSubject = subject => dispatch => {
+  dispatch({ type: types.SAVE_SUBJECT });
+  Api('POST', '/subjects/', {data: subject})
+    .then((response) => {
+      dispatch(saveSubjectSuccess(response));
+      if(callback !=null){
+        callback(response);
+      }
+    })
+    .catch(err =>{
+      
+    }); 
+};
+
+export const fetchSubject = id => dispatch => {
+  dispatch({ type: types.FETCH_SUBJECT });
+  Api('GET', '/subject/'+id, {})
+    .then((response) => {
+      dispatch(fetchSubjectSuccess(response));
+      if(callback !=null){
+        callback(response);
+      }
+    })
+    .catch(err =>{
+      
+    }); 
+}
+
+export const fetchSubjectBySlug = (slug, callback) => dispatch => {
+  dispatch({ type: types.FETCH_SUBJECT });
+  Api('GET', '/subject/slug/'+slug, {})
+    .then((response) => {
+      dispatch(fetchSubjectSuccess(response));
+      if(callback !=null){
+        callback(response);
+      }
+    })
+    .catch(err =>{
+      
+    }); 
 }
