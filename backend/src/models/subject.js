@@ -8,8 +8,8 @@ const subjectSchema = new mongoose.Schema(
         slug: String,
         url: String,
         repos_url: String,
-        assignments: [{type: Schema.Types.ObjectId, ref: 'Assignment'}],
-        works: [{type: Schema.Types.ObjectId, ref: 'Work'}]
+        assignments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Assignment'}],
+        works: [{type: mongoose.Schema.Types.ObjectId, ref: 'Work'}]
     },
     { timestamps: true }
 );
